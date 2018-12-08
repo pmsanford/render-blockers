@@ -21,16 +21,14 @@ impl BlockerGraph {
         }
     }
     pub fn add(&mut self, from: &Issue, to: &Issue) {
-        if from.resolution().is_none() {
-            let from_id: u64 = from.id.parse().unwrap();
-            let to_id: u64 = to.id.parse().unwrap();
-            if self.edges.insert(Edge {
-                from: from_id,
-                to: to_id,
-            }) {
-                self.nodes.insert(from_id, Node::from_issue(from));
-                self.nodes.insert(to_id, Node::from_issue(to));
-            }
+        let from_id: u64 = from.id.parse().unwrap();
+        let to_id: u64 = to.id.parse().unwrap();
+        if self.edges.insert(Edge {
+            from: from_id,
+            to: to_id,
+        }) {
+            self.nodes.insert(from_id, Node::from_issue(from));
+            self.nodes.insert(to_id, Node::from_issue(to));
         }
     }
 }
