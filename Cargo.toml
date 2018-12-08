@@ -6,4 +6,4 @@ authors = ["Paul Sanford <me@paulsanford.net>"]
 [dependencies]
 dot = "0.1"
 goji = "0.2"
-structopt = "0.2.13"
+structopt = "0.2"

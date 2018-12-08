@@ -18,16 +18,22 @@ struct Opt {
     /// API Key for JIRA Cloud. Get here: https://id.atlassian.com/manage/api-tokens
     #[structopt(name = "api_key")]
     api_key: String,
+
+    /// Address of your JIRA instance, including http/https prefix
+    #[structopt(name = "jira_address")]
+    jira_address: String,
 }
 
 fn main() {
     let opt = Opt::from_args();
 
-    let host = "";
-
     let query = "Sprint in openSprints()";
 
-    let jira = Jira::new(host, Credentials::Basic(opt.username, opt.api_key)).unwrap();
+    let jira = Jira::new(
+        opt.jira_address,
+        Credentials::Basic(opt.username, opt.api_key),
+    )
+    .unwrap();
 
     let mut graph = BlockerGraph::new();
 
