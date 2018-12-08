@@ -1,0 +1,7 @@
+[package]
+name = "jtest"
+version = "0.1.0"
+authors = ["Paul Sanford <me@paulsanford.net>"]
+
+[dependencies]
+goji = "0.2"
