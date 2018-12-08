@@ -86,7 +86,6 @@ impl<'a> dot::GraphWalk<'a, Node, Edge> for BlockerGraph {
 pub struct Node {
     id: u64,
     key: String,
-    summary: String,
     status: String,
 }
 
@@ -109,7 +108,6 @@ impl Node {
         Node {
             id: issue.id.parse().unwrap(),
             key: issue.key.clone(),
-            summary: issue.summary().unwrap_or_else(|| "<none>".to_string()),
             status: issue.status().unwrap().name,
         }
     }
