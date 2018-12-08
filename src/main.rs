@@ -21,15 +21,16 @@ impl BlockerGraph {
         }
     }
     pub fn add(&mut self, from: &Issue, to: &Issue) {
-        if let None = from.resolution() {
+        if from.resolution().is_none() {
             let from_id: u64 = from.id.parse().unwrap();
             let to_id: u64 = to.id.parse().unwrap();
-            self.edges.insert(Edge {
+            if self.edges.insert(Edge {
                 from: from_id,
                 to: to_id,
-            });
-            self.nodes.insert(from_id, Node::from_issue(from));
-            self.nodes.insert(to_id, Node::from_issue(to));
+            }) {
+                self.nodes.insert(from_id, Node::from_issue(from));
+                self.nodes.insert(to_id, Node::from_issue(to));
+            }
         }
     }
 }
@@ -73,7 +74,7 @@ impl<'a> dot::GraphWalk<'a, Node, Edge> for BlockerGraph {
     }
 
     fn edges(&'a self) -> dot::Edges<'a, Edge> {
-        let edges: Vec<Edge> = self.edges.iter().map(|e| e.clone()).collect();
+        let edges: Vec<Edge> = self.edges.iter().cloned().collect();
         Cow::Owned(edges)
     }
 
@@ -113,7 +114,7 @@ impl Node {
         Node {
             id: issue.id.parse().unwrap(),
             key: issue.key.clone(),
-            summary: issue.summary().unwrap_or("<none>".to_string()),
+            summary: issue.summary().unwrap_or_else(|| "<none>".to_string()),
             status: issue.status().unwrap().name,
         }
     }
