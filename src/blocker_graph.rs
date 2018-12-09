@@ -55,10 +55,6 @@ impl<'a> dot::Labeller<'a, Node, Edge> for BlockerGraph {
             None => None,
         }
     }
-
-    fn edge_label<'b>(&'b self, _: &Edge) -> dot::LabelText<'b> {
-        dot::LabelText::LabelStr("".into())
-    }
 }
 
 impl<'a> dot::GraphWalk<'a, Node, Edge> for BlockerGraph {
