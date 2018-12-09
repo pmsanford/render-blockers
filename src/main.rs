@@ -32,8 +32,7 @@ fn main() {
     let jira = Jira::new(
         opt.jira_address,
         Credentials::Basic(opt.username, opt.api_key),
-    )
-    .unwrap();
+    ).unwrap();
 
     let mut graph = BlockerGraph::new();
 

@@ -14,6 +14,7 @@ or just run `render.sh` from the repository. Then gaze at the generated `blocker
 
 Nodes are colored by the following rules:
 * Closed: green
+* Review: goldenrod
 * In Progress: blue
 * Cancelled: firebrick (dark red)
 * All Others: no color

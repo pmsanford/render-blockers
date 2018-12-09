@@ -47,6 +47,7 @@ impl<'a> dot::Labeller<'a, Node, Edge> for BlockerGraph {
         let color = match n.status.as_str() {
             "Closed" => Some("green"),
             "In Progress" => Some("blue"),
+            "Review" => Some("goldenrod"),
             "Cancelled" => Some("firebrick"),
             _ => None,
         };
