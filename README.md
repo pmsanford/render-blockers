@@ -1,6 +1,8 @@
 # render-blockers
 Renders clusters of Jira blockers (in the currently open sprints) using graphviz.
 
+![Example Graph](example/ghub.png)
+
 First, build the graphviz definition:
 ```bash
 cargo run me@work.com SoMEkIndOfapiKeY123 https://work.atlassian.net
