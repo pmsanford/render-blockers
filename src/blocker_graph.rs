@@ -30,20 +30,20 @@ impl BlockerGraph {
     }
 }
 
-impl<'a> dot::Labeller<'a, Node, Edge> for BlockerGraph {
-    fn graph_id(&'a self) -> dot::Id<'a> {
+impl dot::Labeller<'_, Node, Edge> for BlockerGraph {
+    fn graph_id(&self) -> dot::Id {
         dot::Id::new("Blockers").unwrap()
     }
 
-    fn node_id(&'a self, n: &Node) -> dot::Id<'a> {
+    fn node_id(&self, n: &Node) -> dot::Id {
         dot::Id::new(format!("N{}", n.id)).unwrap()
     }
 
-    fn node_label<'b>(&'b self, n: &Node) -> dot::LabelText<'b> {
+    fn node_label(&self, n: &Node) -> dot::LabelText {
         dot::LabelText::LabelStr(Cow::Owned(n.key.clone()))
     }
 
-    fn node_color(&'a self, n: &Node) -> Option<dot::LabelText<'a>> {
+    fn node_color(&self, n: &Node) -> Option<dot::LabelText> {
         let color = match n.status.as_str() {
             "Closed" => Some("green"),
             "In Progress" => Some("blue"),
@@ -58,14 +58,14 @@ impl<'a> dot::Labeller<'a, Node, Edge> for BlockerGraph {
     }
 }
 
-impl<'a> dot::GraphWalk<'a, Node, Edge> for BlockerGraph {
-    fn nodes(&'a self) -> dot::Nodes<'a, Node> {
+impl dot::GraphWalk<'_, Node, Edge> for BlockerGraph {
+    fn nodes(&self) -> dot::Nodes<Node> {
         let node_values: Vec<&Node> = self.nodes.values().collect();
         let nodes = node_values.iter().map(|n| (*n).clone()).collect();
         Cow::Owned(nodes)
     }
 
-    fn edges(&'a self) -> dot::Edges<'a, Edge> {
+    fn edges(&self) -> dot::Edges<Edge> {
         let edges: Vec<Edge> = self.edges.iter().cloned().collect();
         Cow::Owned(edges)
     }
