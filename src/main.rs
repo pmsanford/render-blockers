@@ -1,10 +1,6 @@
-extern crate dot;
-extern crate goji;
-extern crate structopt;
-
 mod blocker_graph;
 
-use blocker_graph::BlockerGraph;
+use crate::blocker_graph::BlockerGraph;
 use goji::{Credentials, Jira};
 use structopt::StructOpt;
 
@@ -32,7 +28,8 @@ fn main() {
     let jira = Jira::new(
         opt.jira_address,
         Credentials::Basic(opt.username, opt.api_key),
-    ).unwrap();
+    )
+    .unwrap();
 
     let mut graph = BlockerGraph::new();
 
