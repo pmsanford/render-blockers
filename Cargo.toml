@@ -6,5 +6,5 @@ edition="2018"
 
 [dependencies]
 dot = "0.1"
-goji = "0.2"
+goji = { git = "https://github.com/softprops/goji.git" }
 structopt = "0.2"
